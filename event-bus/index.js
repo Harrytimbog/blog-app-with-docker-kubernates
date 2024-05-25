@@ -8,9 +8,15 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const events = [];
+
 // Routes
 app.post("/events", async (req, res) => {
   const event = req.body;
+
+  // Push every event we get into the event data store
+
+  events.push(event);
 
   // axios.post("http://localhost:4000/events", event);
   // axios.post("http://localhost:4001/events", event);
@@ -39,6 +45,10 @@ app.post("/events", async (req, res) => {
   }
 
   res.send({ status: "OK" });
+});
+
+app.get("/events", (req, res) => {
+  res.send(events);
 });
 
 app.listen(5000, () => {
