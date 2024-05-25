@@ -30,7 +30,12 @@ app.post("/events", async (req, res) => {
   try {
     await axios.post("http://127.0.0.1:4002/events", event);
   } catch (err) {
-    console.error("Error posting to another service:", err.message);
+    console.error("Error posting to query service:", err.message);
+  }
+  try {
+    await axios.post("http://127.0.0.1:4003/events", event);
+  } catch (err) {
+    console.error("Error posting to moderation service:", err.message);
   }
 
   res.send({ status: "OK" });
