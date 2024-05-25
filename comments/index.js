@@ -48,9 +48,33 @@ app.post("/posts/:id/comments", async (req, res) => {
 });
 
 // Event handler
-app.post("/events", (req, res) => {
+app.post("/events", async (req, res) => {
   console.log("Event Received:", req.body.type);
+  // Handle CommentModerated
 
+  if (type === "CommentModerated") {
+    const { id, status, postId, content } = data;
+    const comments = commentsByPostId[postId];
+    const comment = comments.find((comment) => {
+      return comment.id === id;
+    });
+
+    // set the new status value
+    comment.status = status;
+
+    // Not inserting the object back into the array after status is updated because this is already the object in memory
+    // Emit updated event
+
+    await axios.post("http://127.0.0.1:5000/events", {
+      type: "CommentUpdated",
+      data: {
+        id,
+        status,
+        postId,
+        content,
+      },
+    });
+  }
   res.send({});
 });
 
