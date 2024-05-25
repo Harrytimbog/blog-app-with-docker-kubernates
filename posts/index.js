@@ -22,13 +22,18 @@ app.post("/posts", async (req, res) => {
 
   // emit an event
 
-  await axios.post("http://localhost:4005/events", {
-    type: "PostCreated",
-    data: {
-      id,
-      title,
-    },
-  });
+  try {
+    await axios.post("http://127.0.0.1:5000/events", {
+      type: "PostCreated",
+      data: {
+        id,
+        title,
+      },
+    });
+    console.log("Event sent to event-bus");
+  } catch (err) {
+    console.error("Error posting to event-bus:", err.message);
+  }
 
   res.status(201).send(posts[id]);
 });
