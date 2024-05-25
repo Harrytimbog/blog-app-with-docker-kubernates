@@ -46,6 +46,13 @@ app.post("/posts/:id/comments", async (req, res) => {
   res.status(201).send(comments);
 });
 
+// Event handler
+app.post("/events", (req, res) => {
+  console.log("Event Received:", req.body.type);
+
+  res.send({});
+});
+
 app.listen(4001, () => {
   console.log("Listening on 4001");
 });
