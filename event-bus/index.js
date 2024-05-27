@@ -22,27 +22,29 @@ app.post("/events", async (req, res) => {
   // axios.post("http://localhost:4001/events", event);
   // axios.post("http://localhost:4002/events", event);
   try {
-    await axios.post("http://127.0.0.1:4000/events", event);
+    await axios.post("http://post-clusterip-srv:4000/events", event);
   } catch (err) {
     console.error("Error posting to posts service:", err.message);
   }
 
-  try {
-    await axios.post("http://127.0.0.1:4001/events", event);
-  } catch (err) {
-    console.error("Error posting to comments service:", err.message);
-  }
+  // Comment these out to avoid error while testing. will integrate back soon
 
-  try {
-    await axios.post("http://127.0.0.1:4002/events", event);
-  } catch (err) {
-    console.error("Error posting to query service:", err.message);
-  }
-  try {
-    await axios.post("http://127.0.0.1:4003/events", event);
-  } catch (err) {
-    console.error("Error posting to moderation service:", err.message);
-  }
+  // try {
+  //   await axios.post("http://127.0.0.1:4001/events", event);
+  // } catch (err) {
+  //   console.error("Error posting to comments service:", err.message);
+  // }
+
+  // try {
+  //   await axios.post("http://127.0.0.1:4002/events", event);
+  // } catch (err) {
+  //   console.error("Error posting to query service:", err.message);
+  // }
+  // try {
+  //   await axios.post("http://127.0.0.1:4003/events", event);
+  // } catch (err) {
+  //   console.error("Error posting to moderation service:", err.message);
+  // }
 
   res.send({ status: "OK" });
 });

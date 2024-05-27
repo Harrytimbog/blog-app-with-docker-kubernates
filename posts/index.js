@@ -23,7 +23,7 @@ app.post("/posts", async (req, res) => {
   // emit an event
 
   try {
-    await axios.post("http://127.0.0.1:5000/events", {
+    await axios.post("http://event-bus-srv:5000/events", {
       type: "PostCreated",
       data: {
         id,
@@ -46,6 +46,5 @@ app.post("/events", (req, res) => {
 });
 
 app.listen(4000, () => {
-  console.log("v51");
   console.log("Listening on 4000");
 });
