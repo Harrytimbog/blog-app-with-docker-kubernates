@@ -10,11 +10,12 @@ app.use(cors());
 
 const posts = {};
 
+// This get request below is only needed b4 we created our query services. I left iut for testing purpose only
 app.get("/posts", (req, res) => {
   res.send(posts);
 });
 
-app.post("/posts", async (req, res) => {
+app.post("/posts/create", async (req, res) => {
   const id = randomBytes(4).toString("hex");
   const { title } = req.body;
 
