@@ -30,7 +30,7 @@ app.post("/posts/:id/comments", async (req, res) => {
 
   // Emit Event
   try {
-    await axios.post("http://127.0.0.1:5000/events", {
+    await axios.post("http://event-bus-srv:5000/events", {
       type: "CommentCreated",
       data: {
         id: commentId,
@@ -66,7 +66,7 @@ app.post("/events", async (req, res) => {
     // Not inserting the object back into the array after status is updated because this is already the object in memory
     // Emit updated event
 
-    await axios.post("http://127.0.0.1:5000/events", {
+    await axios.post("http://event-bus-srv:5000/events", {
       type: "CommentUpdated",
       data: {
         id,

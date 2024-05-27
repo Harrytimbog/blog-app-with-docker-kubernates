@@ -50,7 +50,7 @@ app.listen(4002, async () => {
   console.log("Listening on 4002");
 
   // fetch events
-  const res = await axios("http://localhost:5000/events");
+  const res = await axios("http://event-bus-srv:5000/events");
 
   for (let event of res.data) {
     console.log("Processing event:", event.type);
