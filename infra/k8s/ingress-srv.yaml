@@ -7,31 +7,31 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: posts.com # could be any url of your choice
+    - host: posts.com # could be any URL of your choice
       http:
         paths:
           - path: /posts/create
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: post-clusterip-srv
                 port:
                   number: 4000
           - path: /posts
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: query-srv
                 port:
                   number: 4002
-          - path: /posts/(.*)/comments
+          - path: /posts/.*/comments
             pathType: ImplementationSpecific
             backend:
               service:
                 name: comments-srv
                 port:
                   number: 4001
-          - path: /?(.*)
+          - path: /(.*)
             pathType: ImplementationSpecific
             backend:
               service:
